@@ -1,0 +1,7 @@
+"./Src/main.o"
+"./Src/ring_buffer.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Src/system_stm32f3xx.o"
+"./Src/uart.o"
+"./Startup/startup_stm32f303vctx.o"

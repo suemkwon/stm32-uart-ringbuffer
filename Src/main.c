@@ -17,13 +17,70 @@
  */
 
 #include <stdint.h>
+#include "uart.h"
 
-#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-#endif
+static void send_uint(uint32_t n) {
+    char buf[12];
+    int i = 11;
+    buf[i] = '\0';
+    if (n == 0) { uart_send_byte('0'); return; }
+    while (n > 0) {
+        buf[--i] = '0' + (n % 10);
+        n /= 10;
+    }
+    uart_send_string(&buf[i]);
+}
 
-int main(void)
-{
-    /* Loop forever */
-	for(;;);
+int main(void) {
+    uint32_t current_baud = 115200;
+    uart_init(current_baud);
+
+    uart_send_string("\r\n==================================\r\n");
+    uart_send_string(" STM32F3 Bare-Metal UART Demo\r\n");
+    uart_send_string(" Ring Buffer + Interrupt Driven\r\n");
+    uart_send_string("==================================\r\n");
+    uart_send_string("Baud rate: ");
+    send_uint(current_baud);
+    uart_send_string("\r\n\r\n");
+    uart_send_string("Commands:\r\n");
+    uart_send_string(" 1 = switch to 9600 baud\r\n");
+    uart_send_string(" 2 = switch to 57600 baud\r\n");
+    uart_send_string(" 3 = switch to 115200 baud\r\n");
+    uart_send_string(" Any other key = echo it back\r\n\r\n");
+
+    while (1) {
+        if (!uart_data_available()) {
+            continue;
+        }
+
+        uint8_t ch = uart_read_byte();
+
+        if (ch == '1') {
+            current_baud = 9600;
+            uart_send_string("\r\nSwitching to 9600 baud...\r\n");
+
+            for (volatile int i = 0; i < 100000; i++);
+            uart_init(current_baud);
+            uart_send_string("Now running at 9600 baud.\r\n");
+
+        } else if (ch == '2') {
+            current_baud = 57600;
+            uart_send_string("\r\nSwitching to 57600 baud...\r\n");
+            for (volatile int i = 0; i < 100000; i++);
+            uart_init(current_baud);
+            uart_send_string("Now running at 57600 baud.\r\n");
+
+        } else if (ch == '3') {
+            current_baud = 115200;
+            uart_send_string("\r\nSwitching to 115200 baud...\r\n");
+            for (volatile int i = 0; i < 100000; i++);
+            uart_init(current_baud);
+            uart_send_string("Now running at 115200 baud.\r\n");
+
+        } else {
+            uart_send_string("Echo: ");
+            uart_send_byte(ch);
+            uart_send_string("\r\n");
+        }
+    }
 }

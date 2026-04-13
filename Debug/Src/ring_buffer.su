@@ -1,0 +1,4 @@
+../Src/ring_buffer.c:10:6:rb_full	16	static
+../Src/ring_buffer.c:14:6:rb_empty	16	static
+../Src/ring_buffer.c:18:6:rb_put	16	static
+../Src/ring_buffer.c:28:6:rb_get	16	static

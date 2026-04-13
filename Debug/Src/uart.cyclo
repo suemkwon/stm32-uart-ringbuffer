@@ -1,0 +1,8 @@
+C:/Users/suemi/STM32-Projects/stm32_uart_ringbuffer/CMSIS/Include/core_cm4.h:1725:22:__NVIC_EnableIRQ	2
+C:/Users/suemi/STM32-Projects/stm32_uart_ringbuffer/CMSIS/Include/core_cm4.h:1855:22:__NVIC_SetPriority	2
+../Src/uart.c:16:6:uart_init	3
+../Src/uart.c:47:6:uart_send_byte	1
+../Src/uart.c:54:6:uart_send_string	2
+../Src/uart.c:60:5:uart_data_available	1
+../Src/uart.c:64:9:uart_read_byte	1
+../Src/uart.c:70:6:USART1_IRQHandler	4

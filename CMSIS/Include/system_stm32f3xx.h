@@ -22,8 +22,8 @@
 
 /** @addtogroup stm32f3xx_system
   * @{
-  */  
-  
+  */
+
 /**
   * @brief Define to prevent recursive inclusion
   */
@@ -32,7 +32,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /** @addtogroup STM32F3xx_System_Includes
   * @{
@@ -82,7 +82,7 @@ extern const uint8_t APBPrescTable[8];    /*!< APB prescalers table values */
 /** @addtogroup STM32F3xx_System_Exported_Functions
   * @{
   */
-  
+
 extern void SystemInit(void);
 extern void SystemCoreClockUpdate(void);
 /**
@@ -98,7 +98,7 @@ extern void SystemCoreClockUpdate(void);
 /**
   * @}
   */
-  
+
 /**
   * @}
   */
